@@ -31,19 +31,19 @@ class BankAccount {
 class Bank {
     // TODO
     final String _bankName;
-    List<BankAccount> clients = [];
+    List<BankAccount> _clients = [];
 
     Bank({required this._bankName});
 
     BankAccount createAccount(int accountId, String accountOwner) {
-      for(var c in clients){
+      for(var c in _clients){
         if (accountId == c._accId){
           throw Exception("this account already exited.");
         }
       }
 
       BankAccount newAcc = BankAccount(name: accountOwner, accId: accountId);
-      clients.add(newAcc);
+      _clients.add(newAcc);
 
       return newAcc;
     }
