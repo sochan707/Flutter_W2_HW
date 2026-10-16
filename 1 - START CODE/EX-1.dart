@@ -39,7 +39,6 @@ class Employee {
   Address get address => _address;
 
   double computeSalary({required Map<Skill,int> skillPrice, int experiencePrice = 0}){
-    double totalSalary = 0;
     _experienceBonus = yearsOfExperience.toDouble() * (experiencePrice);
     _skillBonus = 0;
     
@@ -49,7 +48,7 @@ class Employee {
 
     _totalSalary = _baseSalary + _experienceBonus + _skillBonus;
 
-    return totalSalary;
+    return _totalSalary;
   }
 
   void printDetails() {
