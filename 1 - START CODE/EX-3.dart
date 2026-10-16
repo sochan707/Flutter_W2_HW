@@ -6,50 +6,29 @@ class MyDuration {
   // MyDuration.fromMinutes(int minutes) : assert(minutes >= 0), _milliseconds = minutes * 60000;
   // MyDuration.fromSeconds(int seconds) : assert(seconds >= 0), _milliseconds = seconds * 1000;
 
-  MyDuration._(this._milliseconds);
-
-  factory MyDuration(int milliseconds) {
-    if (milliseconds < 0) {
+  MyDuration._(this._milliseconds) {
+    if (_milliseconds < 0) {
       throw ArgumentError("Milliseconds cannot be negative.");
     }
-    return MyDuration._(milliseconds);
   }
 
-  factory MyDuration.fromHours(int hours) {
-    if (hours < 0) {
-      throw ArgumentError("Hours cannot be negative.");
-    }
-    return MyDuration._(hours * 3600000);
-  }
+  MyDuration.fromHours(int hours) : this._(hours * 3600000);
+  MyDuration.fromMinutes(int minutes) : this._(minutes * 60000);
+  MyDuration.fromSeconds(int seconds) : this._(seconds * 10^3);
 
-  factory MyDuration.fromMinutes(int minutes) {
-    if (minutes < 0) {
-      throw ArgumentError("Minutes cannot be negative.");
-    }
-    return MyDuration._(minutes * 60000);
-  }
-
-  factory MyDuration.fromSeconds(int seconds) {
-    if (seconds < 0) {
-      throw ArgumentError("Seconds cannot be negative.");
-    }
-    return MyDuration._(seconds * 1000);
-  }
-
-  bool operator >(MyDuration other){
+  bool operator >(MyDuration other) {
     return _milliseconds > other._milliseconds;
   }
 
-  MyDuration operator +(MyDuration other){
-    return MyDuration(_milliseconds + other._milliseconds);
+  MyDuration operator +(MyDuration other) {
+    return MyDuration._(_milliseconds + other._milliseconds);
   }
 
-  MyDuration operator -(MyDuration other){
-    if (other._milliseconds > _milliseconds){
+  MyDuration operator -(MyDuration other) {
+    if (other._milliseconds > _milliseconds) {
       throw Exception("Negative.");
     }
-
-    return MyDuration(_milliseconds - other._milliseconds);
+    return MyDuration._(_milliseconds - other._milliseconds);
   }
 
   // Display the duration in a readable format
@@ -73,6 +52,6 @@ void main() {
   try {
     print(duration2 - duration1); // This will throw an exception
   } catch (e) {
-    print(e); 
+    print(e);
   }
 }
